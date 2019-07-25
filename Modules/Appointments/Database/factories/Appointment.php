@@ -8,8 +8,8 @@ $factory->define(Appointment::class, function (Faker $faker) {
     return [
         'doctor_procedure_id' => DB::table('doctors_procedures')->inRandomOrder()->first()->id,
         'appointment_timestamp' => $faker->dateTime,
-        'full_name' => $faker->name,
+        'full_name' => $faker->firstName . ' ' . $faker->lastName,
         'phone_number' => $faker->phoneNumber,
-        'email' => $faker->email,
+        'email' =>  $faker->email,
     ];
 });

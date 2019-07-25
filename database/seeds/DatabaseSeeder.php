@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Modules\Doctors\Database\Seeders\DoctorsDatabaseSeeder;
+use Modules\Appointments\Database\Seeders\AppointmentsDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(DoctorsDatabaseSeeder::class);
+        $this->call(AppointmentsDatabaseSeeder::class);
     }
 }

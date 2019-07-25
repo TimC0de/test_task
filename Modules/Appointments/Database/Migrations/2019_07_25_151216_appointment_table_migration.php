@@ -18,6 +18,7 @@ class AppointmentTableMigration extends Migration
             $table->unsignedInteger('doctor_procedure_id');
             $table->dateTime('appointment_timestamp');
             $table->string('full_name');
+            $table->string('phone_number');
             $table->string('email');
 
             $table->foreign('doctor_procedure_id')->references('id')->on('doctors_procedures')->onUpdate('cascade')->onDelete('cascade');
@@ -31,6 +32,6 @@ class AppointmentTableMigration extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('appointments');
     }
 }
