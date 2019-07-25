@@ -12,4 +12,8 @@ class DoctorsProcedures extends Model
     ];
 
     public $timestamps = false;
+
+    public function appointments() {
+        return $this->hasMany('Modules\Appointments\Entities\Appointment');
+    }
 }

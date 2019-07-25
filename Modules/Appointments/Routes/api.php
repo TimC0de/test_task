@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/doctors', 'DoctorsController@index');
+Route::middleware('auth:api')->get('/appointments', 'AppointmentController@index');
 
-Route::middleware('auth:api')->get('/procedures', 'ProcedureController@index');
+Route::middleware('auth:api')->get('/appointment/doctor-available', 'AppointmentController@checkDoctorsAvailability');
