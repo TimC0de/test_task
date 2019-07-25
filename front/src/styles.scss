@@ -1,1 +1,252 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "common/css/colors";
+@import "common/css/fonts";
+
+::-webkit-scrollbar {
+  height: 100%;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #aaa;
+  transition: .2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #999;
+}
+
+.text-input-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+
+  .text-input-control,
+  .text-select-control {
+    width: 45%;
+    margin: 0;
+  }
+}
+
+.text-input-control {
+  height: 90px;
+  width: 100%;
+
+  box-sizing: border-box;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+
+  label {
+    position: absolute;
+    top: 0;
+
+    width: 100%;
+    height: 45%;
+
+    cursor: pointer;
+
+    transition: .4s;
+
+    display: flex;
+    align-items: center;
+    z-index: 1;
+
+    span.feedback {
+      font-size: 14px;
+      position: relative;
+
+      display: inline-block;
+      margin-left: 10px;
+
+      color: $l-input-red;
+
+      opacity: 1;
+      transition: .3s;
+    }
+  }
+
+  input,
+  textarea {
+    position: absolute;
+    top: 45%;
+
+    width: 100%;
+    height: 55%;
+    border-radius: 25px;
+    border: 1.5px solid rgba(120, 120, 120, 0.66);
+
+    padding-left: 20px;
+    transition: .4s;
+
+    &:focus {
+      width: 100%;
+      height: 100%;
+      top: 0;
+
+      border-radius: 50px;
+      outline: none;
+      border-width: 0;
+
+      box-shadow: 0 0 10px $l-blue;
+
+      padding-top: 10px;
+      padding-left: 30px;
+    }
+
+    &.invalid {
+      border-color: $l-input-red;
+
+      &:focus {
+        box-shadow: 0 0 10px $l-input-red;
+      }
+    }
+  }
+
+  textarea {
+    height: auto !important;
+  }
+
+  .autocomplete-hint {
+    z-index: -1;
+  }
+}
+
+.text-select-control {
+  height: 90px;
+  width: 100%;
+
+  box-sizing: border-box;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+
+  label {
+    position: absolute;
+    top: 0;
+
+    width: 100%;
+    height: 45%;
+
+    cursor: pointer;
+
+    transition: .4s;
+
+    display: flex;
+    align-items: center;
+    z-index: 1;
+
+    span.feedback {
+      font-size: 14px;
+      position: relative;
+
+      display: inline-block;
+      margin-left: 10px;
+
+      color: $l-input-red;
+
+      opacity: 1;
+      transition: .3s;
+    }
+  }
+
+  input,
+  textarea {
+    position: absolute;
+    top: 45%;
+
+    width: 100%;
+    height: 55%;
+    border-radius: 25px;
+    border: 1.5px solid rgba(120, 120, 120, 0.66);
+
+    padding-left: 20px;
+    transition: .4s;
+
+    &.main-input {
+      background-color: transparent;
+    }
+
+    &.autocomplete-input {
+      color: #aaa;
+      background-color: #fff;
+      z-index: -1;
+    }
+
+    &.focused {
+      width: 100%;
+      height: 100%;
+      top: 0;
+
+      border-radius: 50px;
+      outline: none;
+      border-width: 0;
+
+      box-shadow: 0 0 10px $l-blue;
+
+      padding-top: 10px;
+      padding-left: 30px;
+    }
+
+    &.invalid {
+      border-color: $l-input-red;
+
+      &:focus {
+        box-shadow: 0 0 10px $l-input-red;
+      }
+    }
+  }
+
+  textarea {
+    height: auto !important;
+  }
+}
+
+.info-div {
+  display: flex;
+  align-items: center;
+
+  position: fixed;
+  top: -70px;
+  left: 0;
+  z-index: 10;
+
+  width: 100%;
+  height: 50px;
+
+  font-family: $font-roboto;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  color: white;
+
+  transition: .5s;
+
+  .material-icons {
+    font-size: 29px;
+    margin: 0 5px 0 10px;
+  }
+
+  &.active {
+    top: 0;
+  }
+
+  &.error {
+    background-color: $l-input-red;
+  }
+
+  &.success {
+    background-color: $l-info-green;
+  }
+}
