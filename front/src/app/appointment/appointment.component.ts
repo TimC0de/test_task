@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import AppointmentService from './services/appointment';
-import Appointment from './models/';
+import Appointment from './models/appointment.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {
   setInputDefaults,

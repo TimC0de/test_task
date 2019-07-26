@@ -11,6 +11,7 @@ import {DoctorService} from '../services/doctor/doctor.service';
 import {ProcedureService} from '../services/procedure/procedure.service';
 import {AppointmentService} from '../services/appointment/appointment.service';
 import Appointment from '../models/appointment.model';
+import * as $ from 'jquery';
 
 const toSpaceBetween = (s: string): string => {
   return s.replace(/[A-Z]/g, (c: string) => ` ${c.toLowerCase()}`);
@@ -191,9 +192,11 @@ export class AppointmentFormComponent implements OnInit, DoCheck {
         if (this[`${entityType}Names`]) {
           this.completeField(event);
 
-          const entityIndex = this[entityType]
-            .map((entity) => entity.name)
-            .indexOf(autocompleteInput.getAttribute('value'));
+          const entityIndex = entityType === 'doctors'
+            ? this.doctors.map((entity) => entity.name)
+              .indexOf(autocompleteInput.getAttribute('value'))
+            : this.procedures.map((procedure) => procedure.name)
+              .indexOf(autocompleteInput.getAttribute('value'));
 
           this[`${otherEntityType}Clone`] = this[entityType][entityIndex][otherEntityType];
         } else {
