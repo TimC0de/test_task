@@ -12,7 +12,3 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::get('/appointments', 'AppointmentController@index');
-
-Route::get('/appointment/doctor-available', 'AppointmentController@checkDoctorsAvailability');

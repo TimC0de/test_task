@@ -1,9 +1,24 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {BaseService} from '../../../core/base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DoctorService {
+export class DoctorService extends BaseService {
 
-  constructor() { }
+  constructor(
+    http: HttpClient
+  ) {
+    super(http);
+  }
+
+  public findAll() {
+    const url = `${this.baseUrl}/doctors`;
+
+    return this.http.get(
+      url,
+      this.httpOptions
+    );
+  }
 }

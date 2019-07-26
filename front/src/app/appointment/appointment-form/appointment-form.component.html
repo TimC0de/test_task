@@ -1,44 +1,174 @@
 <div id="appointment-form-container">
-  <div class="col-xl-4 col-lg-5 col-md-6 col-sm-7">
+  <div class="col-xl-6 col-lg-8 col-md-10 col-12">
     <header>
       Appointment Form
     </header>
     <hr>
     <section>
       <form [formGroup]="form">
+        <div class="control-container">
+          <div class="text-select-control">
+            <label for="doctor">
+              Chose the doctor
+              <span class="feedback"></span>
+            </label>
+            <input id="doctor"
+                   class="main-input"
+                   type="text"
+                   placeholder="Chose the doctor"
+                   data-placeholder="Chose the doctor"
+                   formControlName="doctor"
+                   (keyup)="autocompleteInputField($event)"
+                   (focus)="autocompleteInputField($event)"
+                   (blur)="completeField($event)"
+                   required
+                   data-last
+                   autocomplete="off"
+                   disabled>
+            <input
+              type="text"
+              class="autocomplete-input"
+              autocomplete="off"
+              disabled/>
+          </div>
+          <div class="input-hint" data-toggle="tooltip" data-placement="bottom" title="Start typing the doctor's name to see suitable doctors">
+            <svg x="0px" y="0px" viewBox="0 0 31.357 31.357" style="enable-background:new 0 0 31.357 31.357;" xml:space="preserve">
+              <g>
+                <path d="M15.255,0c5.424,0,10.764,2.498,10.764,8.473c0,5.51-6.314,7.629-7.67,9.62c-1.018,1.481-0.678,3.562-3.475,3.562
+                  c-1.822,0-2.712-1.482-2.712-2.838c0-5.046,7.414-6.188,7.414-10.343c0-2.287-1.522-3.643-4.066-3.643
+                  c-5.424,0-3.306,5.592-7.414,5.592c-1.483,0-2.756-0.89-2.756-2.584C5.339,3.683,10.084,0,15.255,0z M15.044,24.406
+                  c1.904,0,3.475,1.566,3.475,3.476c0,1.91-1.568,3.476-3.475,3.476c-1.907,0-3.476-1.564-3.476-3.476
+                  C11.568,25.973,13.137,24.406,15.044,24.406z"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="control-container">
+          <div class="text-select-control">
+            <label for="procedure">
+              Chose the procedure
+              <span class="feedback"></span>
+            </label>
+            <input id="procedure"
+                   class="main-input"
+                   type="text"
+                   placeholder="Chose the procedure"
+                   data-placeholder="Chose the procedure"
+                   formControlName="procedure"
+                   (keyup)="autocompleteInputField($event)"
+                   (focus)="autocompleteInputField($event)"
+                   (blur)="completeField($event)"
+                   required
+                   data-last
+                   autocomplete="off"
+                   disabled>
+            <input
+              type="text"
+              class="autocomplete-input"
+              autocomplete="off"
+              disabled/>
+          </div>
+          <div class="input-hint" data-toggle="tooltip" data-placement="bottom" title="Start typing the procedure's name to see suitable procedures">
+            <svg x="0px" y="0px" viewBox="0 0 31.357 31.357" style="enable-background:new 0 0 31.357 31.357;" xml:space="preserve">
+              <g>
+                <path d="M15.255,0c5.424,0,10.764,2.498,10.764,8.473c0,5.51-6.314,7.629-7.67,9.62c-1.018,1.481-0.678,3.562-3.475,3.562
+                  c-1.822,0-2.712-1.482-2.712-2.838c0-5.046,7.414-6.188,7.414-10.343c0-2.287-1.522-3.643-4.066-3.643
+                  c-5.424,0-3.306,5.592-7.414,5.592c-1.483,0-2.756-0.89-2.756-2.584C5.339,3.683,10.084,0,15.255,0z M15.044,24.406
+                  c1.904,0,3.475,1.566,3.475,3.476c0,1.91-1.568,3.476-3.475,3.476c-1.907,0-3.476-1.564-3.476-3.476
+                  C11.568,25.973,13.137,24.406,15.044,24.406z"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div *ngIf="form.get('doctor').value && form.get('procedure').value" class="control-container">
+          <div class="text-input-control">
+            <label for="appointmentTimestamp">
+              Chose the appointment timestamp
+              <span class="feedback"></span>
+            </label>
+            <input id="appointmentTimestamp"
+                   type="datetime-local"
+                   placeholder="Chose the appointment timestamp"
+                   data-placeholder="Chose the appointment timestamp"
+                   data-toggle="popover"
+                   formControlName="appointmentTimestamp"
+                   (input)="validate()"
+                   (blur)="isDoctorAvailable()"
+                   required>
+          </div>
+          <div class="input-hint" data-toggle="tooltip" data-placement="bottom" title="Here you can see all available dates for selected doctor and book one">
+            <svg x="0px" y="0px" viewBox="0 0 31.357 31.357" style="enable-background:new 0 0 31.357 31.357;" xml:space="preserve">
+              <g>
+                <path d="M15.255,0c5.424,0,10.764,2.498,10.764,8.473c0,5.51-6.314,7.629-7.67,9.62c-1.018,1.481-0.678,3.562-3.475,3.562
+                  c-1.822,0-2.712-1.482-2.712-2.838c0-5.046,7.414-6.188,7.414-10.343c0-2.287-1.522-3.643-4.066-3.643
+                  c-5.424,0-3.306,5.592-7.414,5.592c-1.483,0-2.756-0.89-2.756-2.584C5.339,3.683,10.084,0,15.255,0z M15.044,24.406
+                  c1.904,0,3.475,1.566,3.475,3.476c0,1.91-1.568,3.476-3.475,3.476c-1.907,0-3.476-1.564-3.476-3.476
+                  C11.568,25.973,13.137,24.406,15.044,24.406z"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div *ngIf="form.get('doctor').value && form.get('procedure').value" class="alert alert-danger alert-div" hidden>
+          <div class="material-icons">error_outline</div>
+          <span>Doctor is not available at this time</span>
+        </div>
+        <div *ngIf="form.get('doctor').value && form.get('procedure').value" class="alert alert-success alert-div" hidden>
+          <div class="material-icons">done</div>
+          <span>Doctor is available at this time</span>
+        </div>
+        <div *ngIf="!form.get('doctor').value || !form.get('procedure').value" class="alert alert-danger alert-div">
+          Select doctor and procedure first to make an appointment
+        </div>
+        <hr>
         <div class="text-input-control">
-          <label for="employeeId">
-            Employee Id
+          <label for="fullName">
+            Full Name
             <span class="feedback"></span>
           </label>
-          <input id="employeeId"
+          <input id="fullName"
                  type="text"
-                 placeholder="Employee Id"
-                 formControlName="employeeId"
+                 placeholder="Enter full name"
+                 data-placeholder="Enter full name"
+                 formControlName="fullName"
                  (input)="validate()"
                  required>
         </div>
         <div class="text-input-control">
-          <label for="password">
-            Password
+          <label for="phoneNumber">
+            Phone Number
             <span class="feedback"></span>
           </label>
-          <input id="password"
-                 type="password"
-                 placeholder="Password"
-                 formControlName="password"
+          <input id="phoneNumber"
+                 type="text"
+                 placeholder="Enter phone number"
+                 data-placeholder="Enter phone number"
+                 formControlName="phoneNumber"
                  (input)="validate()"
                  required>
+        </div>
+        <div class="text-input-control">
+          <label for="email">
+            Email
+            <span class="feedback"></span>
+          </label>
+          <input id="email"
+                 type="text"
+                 placeholder="Enter your email"
+                 data-placeholder="Enter your email"
+                 formControlName="email"
+                 (input)="validate()"
+                 required
+                 email>
         </div>
       </form>
     </section>
     <hr>
     <footer class="flex-md-row flex-column">
       <button class="col-md-5 col-12"
-              [class.disabled]="!form.valid"
-              (click)="submit()">Sign
+              [class.disabled]="form.invalid || !doctorAvailable"
+              (click)="submit()">Book Now
       </button>
-      <button class="col-md-5 col-12" routerLink="/sign-up">Admin Console
+      <button class="col-md-5 col-12" routerLink="/appointments">Admin Console
       </button>
     </footer>
   </div>
@@ -46,4 +176,10 @@
 
 <div class="info-div error">
   <div class="material-icons">error_outline</div>
+  Please, provide the right data to create a new appointment
+</div>
+
+<div class="info-div success">
+  <div class="material-icons">done</div>
+  Your appointment was created successfully
 </div>

@@ -1,1 +1,171 @@
-<p>appointment works!</p>
+<div class="content-container">
+  <header>
+    Appointments
+  </header>
+  <hr>
+  <div class="filter-block">
+    <div class="filter-block-content col-xl-3 col-md-5 col-sm-10 col-12 p-0 ml-md-3">
+      <div class="text-input-control">
+        <label for="itemsCount">
+          Show Items
+          <span class="feedback"></span>
+        </label>
+        <input id="itemsCount"
+               type="text"
+               placeholder="Search"
+               data-placeholder="Search"
+               [formControl]="itemsCount"
+               (input)="validate()"
+               (blur)="filter()"
+               required>
+      </div>
+    </div>
+    <button data-toggle="collapse" data-target="#filtersCollapse" aria-expanded="false" aria-controls="filtersCollapse">
+      <span class="material-icons">tune</span>Filters
+    </button>
+  </div>
+  <div class="collapse" id="filtersCollapse" [formGroup]="filterForm">
+    <div class="card card-body">
+      <div class="card-title">
+        <span>Appointment Filters</span>
+        <div>
+          <label for="sort">
+            Sort:
+          </label>
+          <select id="sort" formControlName="sort">
+            <option value="newest" selected>Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </div>
+      </div>
+      <hr>
+      <div class="card-content">
+        <div class="input-field-row">
+          <div class="text-input-control">
+            <label for="fullName">
+              Full Name
+              <span class="feedback"></span>
+            </label>
+            <input id="fullName"
+                   type="text"
+                   placeholder="Enter full name"
+                   data-placeholder="Enter full name"
+                   formControlName="fullName">
+          </div>
+          <div class="text-input-control">
+            <label for="phoneNumber">
+              Phone Number
+              <span class="feedback"></span>
+            </label>
+            <input id="phoneNumber"
+                   type="text"
+                   placeholder="Enter phone number"
+                   data-placeholder="Enter phone number"
+                   formControlName="phoneNumber">
+          </div>
+          <div class="text-input-control">
+            <label for="email">
+              Email
+              <span class="feedback"></span>
+            </label>
+            <input id="email"
+                   type="text"
+                   placeholder="Enter email"
+                   data-placeholder="Enter email"
+                   formControlName="email">
+          </div>
+        </div>
+        <div class="input-field-row">
+          <div class="text-input-control">
+            <label for="minAppointmentTimestamp">
+              First Appointment Timestamp
+              <span class="feedback"></span>
+            </label>
+            <input id="minAppointmentTimestamp"
+                   type="datetime-local"
+                   placeholder="Select timestamp"
+                   data-placeholder="Select timestamp"
+                   formControlName="minAppointmentTimestamp"
+                   (input)="validateFilter()">
+          </div>
+          <div class="text-input-control">
+            <label for="maxAppointmentTimestamp">
+              Second Appointment Timestamp
+              <span class="feedback"></span>
+            </label>
+            <input id="maxAppointmentTimestamp"
+                   type="datetime-local"
+                   placeholder="Select timestamp"
+                   data-placeholder="Select timestamp"
+                   formControlName="maxAppointmentTimestamp"
+                   (input)="validateFilter()">
+          </div>
+          <div *ngIf="appointmentTimestampErrors" class="alert alert-danger">
+            <div class="material-icons">error_outline</div>
+            <span></span>
+          </div>
+          <div *ngIf="!appointmentTimestampErrors"></div>
+        </div>
+      </div>
+      <div class="buttons-group">
+        <button (click)="findAppointments(1)">Filter</button>
+        <button (click)="resetFilter()">Clear filters</button>
+      </div>
+    </div>
+  </div>
+  <table *ngIf="appointments.length">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th class="important">Procedure</th>
+      <th class="important">Full Name</th>
+      <th>Phone Number</th>
+      <th class="important">Email</th>
+      <th>Appointment Timestamp</th>
+      <th>Created At</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let appointment of appointments">
+      <td>{{ appointment.id }}</td>
+      <td>{{ appointment.doctor_procedure.doctor.name + ' (' + appointment.doctor_procedure.procedure.name + ')'}}</td>
+      <td>{{ appointment.full_name }}</td>
+      <td>{{ appointment.phone_number }}</td>
+      <td>{{ appointment.email }}</td>
+      <td>{{ formatDate(appointment.appointment_timestamp) }}</td>
+      <td>{{ formatDate(appointment.created_at) }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="empty-list" *ngIf="!appointments.length">
+    No appointments in list.
+  </div>
+
+  <app-pagination *ngIf="appointmentsCount > itemsCount.value"
+                  [lastPage]="pagesCount()"
+                  (pageChanged)="pageChanged($event)">
+  </app-pagination>
+</div>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteButton" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-danger">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Entity</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Do you really want to delete this entity?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" (click)="deleteEntity()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

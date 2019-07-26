@@ -6,12 +6,17 @@ import {AppointmentComponent} from './appointment/appointment.component';
 
 const routes: Routes = [
   {
-    path: '/appointment-form',
+    path: 'appointment-form',
     component: AppointmentFormComponent,
   },
   {
-    path: '/appointments',
+    path: 'appointments',
     component: AppointmentComponent,
+  },
+  {
+    path: '',
+    redirectTo: '/appointment-form',
+    pathMatch: 'full'
   }
 ];
 

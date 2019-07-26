@@ -19,6 +19,6 @@ class AppointmentsDatabaseSeeder extends Seeder
         Model::unguard();
 
         DB::table('appointments')->delete();
-        factory(Appointment::class, 10)->create();
+        factory(Appointment::class, 50)->create();
     }
 }

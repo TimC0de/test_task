@@ -16,4 +16,12 @@ class DoctorsProcedures extends Model
     public function appointments() {
         return $this->hasMany('Modules\Appointments\Entities\Appointment');
     }
+
+    public function doctor() {
+        return $this->belongsTo('Modules\Doctors\Entities\Doctor');
+    }
+
+    public function procedure() {
+        return $this->belongsTo('Modules\Doctors\Entities\Procedure');
+    }
 }

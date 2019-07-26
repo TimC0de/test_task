@@ -11,12 +11,12 @@ class Appointment extends Model
         'appointment_timestamp',
         'full_name',
         'phone_number',
-        'email'
+        'email',
     ];
 
-    public $timestamps = false;
+    public $timestamps = true;
 
-    public function doctorProcedure() {
+    public function doctor_procedure() {
         return $this->belongsTo('Modules\Doctors\Entities\DoctorsProcedures');
     }
 }

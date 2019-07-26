@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "common/css/colors";
-@import "common/css/fonts";
+@import "assets/scss/colors";
+@import "assets/scss/fonts";
 
 ::-webkit-scrollbar {
   height: 100%;
@@ -179,9 +179,14 @@
     }
 
     &.autocomplete-input {
-      color: #aaa;
+      color: transparent;
       background-color: #fff;
       z-index: -1;
+      border-color: transparent;
+
+      &.focused {
+        color: #aaa;
+      }
     }
 
     &.focused {
@@ -248,5 +253,65 @@
 
   &.success {
     background-color: $l-info-green;
+  }
+}
+
+.popover-body {
+  font-family: $font-roboto;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 250px;
+
+    .link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 25px;
+      height: 20px;
+      border-radius: 3px;
+      border: 1px solid #999;
+
+      padding: 5px;
+    }
+  }
+
+  table {
+    width: 250px;
+    margin-top: 15px;
+
+    th {
+      width: calc(250px / 7);
+
+      font-weight: 600;
+      color: #555;
+      letter-spacing: 0.01em;
+      text-align: center;
+    }
+
+    tbody {
+      tr {
+        height: 30px;
+
+        td.filled {
+          border: 0.5px solid #ccc;
+          text-align: center;
+          transition: .1s;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #eee;
+          }
+
+          &.selected {
+            background-color: $l-blue;
+          }
+        }
+      }
+    }
   }
 }

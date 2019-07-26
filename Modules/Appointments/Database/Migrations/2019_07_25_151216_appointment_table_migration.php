@@ -20,6 +20,7 @@ class AppointmentTableMigration extends Migration
             $table->string('full_name');
             $table->string('phone_number');
             $table->string('email');
+            $table->timestamps();
 
             $table->foreign('doctor_procedure_id')->references('id')->on('doctors_procedures')->onUpdate('cascade')->onDelete('cascade');
         });

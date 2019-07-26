@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['namespace' => '\Modules\Doctors\Http\Controllers'], function () {
+    Route::get('/doctors', 'DoctorsController@index');
+    Route::get('/procedures', 'ProcedureController@index');
+});
+
+Route::group(['namespace' => '\Modules\Appointments\Http\Controllers'], function () {
+    Route::get('/appointments', 'AppointmentsController@index');
+    Route::get('/appointments/count', 'AppointmentsController@count');
+    Route::get('/appointments/doctor-available', 'AppointmentsController@checkDoctorsAvailability');
+    Route::post('/appointments', 'AppointmentsController@store');
 });
